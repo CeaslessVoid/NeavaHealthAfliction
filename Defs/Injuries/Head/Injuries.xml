@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <NeavaMMI.InjuryHediffDef>
+        <defName>MMI_Concussion</defName>
+        <label>concussion</label>
+        <hediffClass>NeavaMMI.MMI_ConcussionDecay</hediffClass>
+        <description>A traumatic brain injury caused by a blow to the head.</description>
+        <initialSeverity>0.1</initialSeverity>
+        <maxSeverity>1.0</maxSeverity>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+
+        <stages>
+            <li>
+                <label>minor</label>
+                <capMods>
+                <li>
+                    <capacity>Consciousness</capacity>
+                    <offset>-0.02</offset>
+                </li>
+                </capMods>
+            </li>
+            <li>
+                <minSeverity>0.6</minSeverity>
+                <label>major</label>
+                <capMods>
+                <li>
+                    <capacity>Consciousness</capacity>
+                    <offset>-0.05</offset>
+                </li>
+                </capMods>
+            </li>
+            <li>
+                <minSeverity>0.9</minSeverity>
+                <label>extreme</label>
+                <capMods>
+                <li>
+                    <capacity>Consciousness</capacity>
+                    <offset>-0.07</offset>
+                </li>
+                </capMods>
+            </li>
+        </stages>
+        
+        <applyGroup>
+            <li>UpperHead</li>
+        </applyGroup>
+
+        <extensionClass>NeavaMMI.MMI_ConcussionApply</extensionClass>
+
+    </NeavaMMI.InjuryHediffDef>
+
+    <HediffDef>
+		<defName>MMI_BlurredVision</defName>
+		<label>blurred vision</label>
+		<description>Vision blurred, rendering sight useless</description>
+		<scenarioCanAdd>false</scenarioCanAdd>
+        <hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>
+					<!--60=1 sec -->
+					<!--41,7 sec ~ 1 rimworld hour -->
+					<min>180</min>
+					<max>600</max>
+				</disappearsAfterTicks>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+                    <li>
+                        <capacity>Sight</capacity>
+                        <setMax>0.2</setMax>
+                    </li>
+                </capMods>
+			</li>
+		</stages>
+	</HediffDef>
+
+    <HediffDef>
+		<defName>MMI_Headache</defName>
+		<label>headache</label>
+		<description>Head pounding</description>
+		<scenarioCanAdd>false</scenarioCanAdd>
+        <hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>
+					<!--60=1 sec -->
+					<!--41,7 sec ~ 1 rimworld hour -->
+					<min>700</min>
+					<max>1500</max>
+				</disappearsAfterTicks>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<painOffset>0.05</painOffset>
+			</li>
+		</stages>
+        
+	</HediffDef>
+
+    <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_CerebralHemorrhage</defName>
+        <label>subdural hematoma</label>
+        <description>A ruptured vein causes blood to pool under the dura mater</description>
+        <tendable>true</tendable>
+        <initialSeverity>0.1</initialSeverity>
+        <maxSeverity>1.0</maxSeverity>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Bleeding in the brain</labelNounPretty>
+        <hediffClass>NeavaMMI.MMI_CerebralHemorrhage</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+            <li Class="HediffCompProperties_Infecter">
+                <infectionChance>0.15</infectionChance>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.0125</painPerSeverity>
+            <bleedRate>10</bleedRate>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Bleed Out</destroyedLabel>
+            <destroyedOutLabel>Bleed Out</destroyedOutLabel>
+        </injuryProps>
+
+        <stages>
+			<li>
+				<capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                </capMods>
+			</li>
+		</stages>
+
+        <applyTag>
+            <li>ConsciousnessSource</li>
+        </applyTag>
+
+        <extensionClass>NeavaMMI.MMI_CerebralHemorrhageApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef>
+
+    <HediffDef>
+        <defName>MMI_Seizures</defName>
+        <label>seizures</label>
+        <description>A sudden burst of uncontrolled neurological activity.</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>120</min>
+                    <max>180</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <setMax>0.0</setMax>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.0</setMax>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>MMI_Dyspnea</defName>
+        <label>dyspnea</label>
+        <description>Short, and sometimes breathless breaths.</description>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>-0.2</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_CerebralEdema</defName>
+        <label>cerebral edema</label>
+        <description>The brain expands to its limits, and the neural tissue presses against the skill, it ruptures all the veins within the brain</description>
+        <tendable>true</tendable>
+        <maxSeverity>1.0</maxSeverity>
+        <lethalSeverity>1.0</lethalSeverity>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Swelling of the brain</labelNounPretty>
+        <hediffClass>NeavaMMI.MMI_CerebralEdema</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.0125</painPerSeverity>
+            <bleedRate>10</bleedRate>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Veins Ruptured</destroyedLabel>
+            <destroyedOutLabel>Veins Ruptured</destroyedOutLabel>
+        </injuryProps>
+
+        <stages>
+			<li>
+				<capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                </capMods>
+			</li>
+		</stages>
+
+        <extensionClass>NeavaMMI.MMI_CerebralEdemaApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef>
+
+    <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_TympanicRupture</defName>
+        <label>tympanic rupture</label>
+        <description>Ruptured Eardrum</description>
+        <tendable>true</tendable>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Ruptured Eardrum</labelNounPretty>
+        <hediffClass>Hediff_Injury</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+            <li Class="HediffCompProperties_Infecter">
+                <infectionChance>0.1</infectionChance>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.0125</painPerSeverity>
+            <bleedRate>0.2</bleedRate>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Eardrum Ruptured</destroyedLabel>
+            <destroyedOutLabel>Eardrum Ruptured</destroyedOutLabel>
+        </injuryProps>
+
+        <stages>
+			<li>
+				<capMods>
+                    <li>
+                        <capacity>Hearing</capacity>
+                        <setMax>0.01</setMax>
+                    </li>
+                </capMods>
+			</li>
+		</stages>
+
+        <applyTag>
+            <li>HearingSource</li>
+        </applyTag>
+
+        <extensionClass>NeavaMMI.MMI_TympanicRuptureApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef>
+
+    <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_OccipitalNeuralgia</defName>
+        <label>occipital neuralgia</label>
+        <description>The nerves at the back of the scull</description>
+        <tendable>true</tendable>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Swelling of the brain</labelNounPretty>
+        <hediffClass>NeavaMMI.MMI_CerebralEdema</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.015</painPerSeverity>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Nerves Compressed</destroyedLabel>
+            <destroyedOutLabel>Nerves Compressed</destroyedOutLabel>
+        </injuryProps>
+
+        <applyTag>
+            <li>BreathingPathway</li>
+        </applyTag>
+        <applyGroup>
+            <li>FullHead</li>
+        </applyGroup>
+
+        <extensionClass>NeavaMMI.MMI_OccipitalNeuralgiaApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef>
+
+    <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_Dislocations</defName>
+        <label>Dislocated Bone</label>
+        <description>A dislocated bone</description>
+        <tendable>true</tendable>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Dislocated Bone</labelNounPretty>
+        <hediffClass>Hediff_Injury</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.015</painPerSeverity>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Bones Dislocated</destroyedLabel>
+            <destroyedOutLabel>Bones Dislocated</destroyedOutLabel>
+        </injuryProps>
+
+        <applyTag>
+            <li>ManipulationLimbCore</li>
+            <li>ManipulationLimbSegment</li>
+            <li>BreathingSourceCage</li>
+            <li>MovingLimbCore</li>
+            <li>MovingLimbSegment</li>
+        </applyTag>
+
+        <stages>
+			<li>
+				<partEfficiencyOffset>-0.5</partEfficiencyOffset>
+			</li>
+		</stages>
+
+        <extensionClass>NeavaMMI.MMI_DislocationsApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef>
+
+    <!-- <NeavaMMI.InjuryHediffDef>
+		<defName>MMI_Fractures</defName>
+        <label>fractures</label>
+        <description>A fractured bone</description>
+        <tendable>true</tendable>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <specialInjury>false</specialInjury>
+        <labelNounPretty>Fractured Bone</labelNounPretty>
+        <hediffClass>Hediff_Injury</hediffClass>
+
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>treated</labelTendedWell>
+                <labelTendedWellInner>treated</labelTendedWellInner>
+                <labelSolidTendedWell>treated</labelSolidTendedWell>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.015</painPerSeverity>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Bones Fractured</destroyedLabel>
+            <destroyedOutLabel>Bones Fractured</destroyedOutLabel>
+        </injuryProps>
+
+        <applyTag>
+            <li>ManipulationLimbCore</li>
+            <li>ManipulationLimbSegment</li>
+            <li>BreathingSourceCage</li>
+            <li>MovingLimbCore</li>
+            <li>MovingLimbSegment</li>
+        </applyTag>
+
+        <stages>
+			<li>
+				<partEfficiencyOffset>-0.5</partEfficiencyOffset>
+			</li>
+		</stages>
+
+        <extensionClass>NeavaMMI.MMI_DislocationsApply</extensionClass>
+
+	</NeavaMMI.InjuryHediffDef> -->
+
+</Defs>
